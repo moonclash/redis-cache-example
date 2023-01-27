@@ -1,0 +1,17 @@
+version: '3'
+
+services:
+  redis:
+    image: redis
+  server:
+    build: .
+    ports:
+      - 8000:8000
+    volumes:
+      - /server/node_modules
+      - ./server:/server
+    command: npm run start
+  db:
+    image: postgres
+    env_file:
+      - .env
